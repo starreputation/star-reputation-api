@@ -1,3 +1,7 @@
+/* =========================
+CUSTOMER DATABASE
+========================= */
+
 const customers=[
 "1xk4fsh1","351xoqj5","m3bxgivi","ogq4zivx","bve1y3s3",
 "kj5za7d9","wq2np704","et2by2rl","3amono96","ayiaiyht",
@@ -11,7 +15,9 @@ const customers=[
 "15xjvzz1","qpsxxrs2","39ksptsl","w2702f2s","3qi6wx2p"
 ]
 
-/* AUTO LOGIN */
+/* =========================
+AUTO LOGIN SESSION
+========================= */
 
 window.onload=function(){
 
@@ -22,26 +28,27 @@ if(customer){
 document.getElementById("loginPage").style.display="none"
 document.getElementById("panel").style.display="block"
 
-document.getElementById("welcome").innerText="Customer ID: "+customer
+document.getElementById("welcome").innerText="Welcome Customer: "+customer
 
 loadProfile()
-loadReviews()
 openTab("dashboard")
 
 }
 
 }
 
-/* LOGIN */
+/* =========================
+LOGIN SYSTEM
+========================= */
 
 function login(){
 
-let u=document.getElementById("user").value
-let p=document.getElementById("pass").value
+let user=document.getElementById("user").value.trim()
+let pass=document.getElementById("pass").value.trim()
 
-if(customers.includes(u) && p=="1234"){
+if(customers.includes(user) && pass==="1234567"){
 
-localStorage.setItem("customer",u)
+localStorage.setItem("customer",user)
 
 location.reload()
 
@@ -53,7 +60,9 @@ alert("Invalid Customer ID or Password")
 
 }
 
-/* LOGOUT */
+/* =========================
+LOGOUT
+========================= */
 
 function logout(){
 
@@ -62,7 +71,9 @@ location.reload()
 
 }
 
-/* TAB SWITCH */
+/* =========================
+TAB SYSTEM
+========================= */
 
 function openTab(tab){
 
@@ -70,28 +81,34 @@ document.querySelectorAll(".tab").forEach(t=>t.style.display="none")
 
 document.getElementById(tab).style.display="block"
 
+if(tab==="dashboard") loadReviews()
+
 }
 
-/* PROFILE LOAD */
+/* =========================
+PROFILE LOAD
+========================= */
 
 function loadProfile(){
 
 let code=localStorage.getItem("customer")
 
-let link=window.location.origin + "/feedback.html?c="+code
+let feedbackLink=window.location.origin+"/feedback.html?c="+code
 
 document.getElementById("code").value=code
-document.getElementById("reviewLink").value=link
+document.getElementById("reviewLink").value=feedbackLink
 
-document.getElementById("feedbackLink").innerText=link
-document.getElementById("feedbackLink").href=link
+document.getElementById("feedbackLink").innerText=feedbackLink
+document.getElementById("feedbackLink").href=feedbackLink
 
 document.getElementById("qr").src=
-"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+encodeURIComponent(link)
+"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+encodeURIComponent(feedbackLink)
 
 }
 
-/* SUBMIT REVIEW */
+/* =========================
+SUBMIT REVIEW
+========================= */
 
 function submitReview(){
 
@@ -124,13 +141,13 @@ window.location="https://maps.app.goo.gl/J9M99u2jlDth9inz8"
 
 alert("Thank you for your feedback")
 
-window.location="thankyou.html"
-
 }
 
 }
 
-/* LOAD REVIEWS */
+/* =========================
+LOAD REVIEWS
+========================= */
 
 function loadReviews(){
 
@@ -138,14 +155,14 @@ let reviews=JSON.parse(localStorage.getItem("reviews"))||[]
 
 let customer=localStorage.getItem("customer")
 
-let data=reviews.filter(r=>r.customer==customer)
+let data=reviews.filter(r=>r.customer===customer)
 
 let body=document.getElementById("reviewBody")
 
 body.innerHTML=""
 
-let pos=0
-let neg=0
+let positive=0
+let negative=0
 
 data.forEach((r,i)=>{
 
@@ -170,18 +187,20 @@ body.innerHTML+=`
 
 `
 
-if(r.rating>=4) pos++
-else neg++
+if(r.rating>=4) positive++
+else negative++
 
 })
 
 document.getElementById("total").innerText=data.length
-document.getElementById("positive").innerText=pos
-document.getElementById("negative").innerText=neg
+document.getElementById("positive").innerText=positive
+document.getElementById("negative").innerText=negative
 
 }
 
-/* SEARCH */
+/* =========================
+SEARCH REVIEWS
+========================= */
 
 function searchReview(){
 
@@ -195,14 +214,16 @@ row.style.display=row.innerText.toLowerCase().includes(input)?"":"none"
 
 }
 
-/* QR DOWNLOAD */
+/* =========================
+DOWNLOAD QR
+========================= */
 
 function downloadQR(){
 
 let link=document.createElement("a")
 
 link.href=document.getElementById("qr").src
-link.download="qr-code.png"
+link.download="customer-qr.png"
 link.click()
 
 }
