@@ -1,38 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Star Reputation</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div class="container" id="loginPage">
-
-<h2>Customer Login</h2>
-
-<input id="user" placeholder="Customer ID">
-<input id="pass" type="password" placeholder="Password">
-
-<button onclick="login()">Login</button>
-
-</div>
-
-
-<div class="container" id="panel" style="display:none">
+<div id="panel">
 
 <h2 id="welcome"></h2>
 
-<div class="menu">
+<div class="nav">
 
 <button onclick="openTab('dashboard')">Dashboard</button>
 <button onclick="openTab('profile')">Profile</button>
-<button onclick="openTab('analysis')">Analysis</button>
+<button onclick="openTab('analysis')">Analytics</button>
+<button onclick="logout()">Logout</button>
 
 </div>
 
+
+<!-- DASHBOARD -->
 
 <div id="dashboard" class="tab">
 
@@ -40,7 +20,7 @@
 
 <input id="search" placeholder="Search reviews..." onkeyup="searchReview()">
 
-<table>
+<table class="reviewTable">
 
 <thead>
 
@@ -62,9 +42,14 @@
 </div>
 
 
+
+<!-- PROFILE -->
+
 <div id="profile" class="tab">
 
 <h3>Business Profile</h3>
+
+<div class="profileBox">
 
 <label>Customer Code</label>
 <input id="code" readonly>
@@ -76,119 +61,11 @@
 
 <img id="qr">
 
-<button onclick="downloadQR()">Download QR</button>
+<button onclick="downloadQR()" class="btn">Download QR</button>
 
-<p style="margin-top:20px">
+<p class="linkBox">
 
-Customer Feedback Page:
-
-<br>
-
-<a id="feedbackLink" target="_blank"></a>
-
-</p>
-
-</div>
-
-
-<div id="analysis" class="tab">
-
-<h3>Analytics</h3>
-
-<p>Total Reviews: <span id="total"></span></p>
-<p>Positive Reviews: <span id="positive"></span></p>
-<p>Negative Reviews: <span id="negative"></span></p>
-
-</div>
-
-</div>
-
-<script src="app.js"></script>
-
-</body>
-</html><!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Star Reputation</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div class="container" id="loginPage">
-
-<h2>Customer Login</h2>
-
-<input id="user" placeholder="Customer ID">
-<input id="pass" type="password" placeholder="Password">
-
-<button onclick="login()">Login</button>
-
-</div>
-
-
-<div class="container" id="panel" style="display:none">
-
-<h2 id="welcome"></h2>
-
-<div class="menu">
-
-<button onclick="openTab('dashboard')">Dashboard</button>
-<button onclick="openTab('profile')">Profile</button>
-<button onclick="openTab('analysis')">Analysis</button>
-
-</div>
-
-
-<div id="dashboard" class="tab">
-
-<h3>Customer Reviews</h3>
-
-<input id="search" placeholder="Search reviews..." onkeyup="searchReview()">
-
-<table>
-
-<thead>
-
-<tr>
-<th>#</th>
-<th>Name</th>
-<th>Contact</th>
-<th>Rating</th>
-<th>Message</th>
-<th>Date</th>
-</tr>
-
-</thead>
-
-<tbody id="reviewBody"></tbody>
-
-</table>
-
-</div>
-
-
-<div id="profile" class="tab">
-
-<h3>Business Profile</h3>
-
-<label>Customer Code</label>
-<input id="code" readonly>
-
-<label>Review Link</label>
-<input id="reviewLink" readonly>
-
-<h4>QR Code</h4>
-
-<img id="qr">
-
-<button onclick="downloadQR()">Download QR</button>
-
-<p style="margin-top:20px">
-
-Customer Feedback Page:
+Customer Feedback Page
 
 <br>
 
@@ -198,20 +75,40 @@ Customer Feedback Page:
 
 </div>
 
+</div>
+
+
+
+<!-- ANALYTICS -->
 
 <div id="analysis" class="tab">
 
 <h3>Analytics</h3>
 
-<p>Total Reviews: <span id="total"></span></p>
-<p>Positive Reviews: <span id="positive"></span></p>
-<p>Negative Reviews: <span id="negative"></span></p>
+<div class="analytics">
+
+<div class="card">
+<h4>Total Reviews</h4>
+<p id="total"></p>
+</div>
+
+<div class="card positive">
+<h4>Positive Reviews</h4>
+<p id="positive"></p>
+</div>
+
+<div class="card negative">
+<h4>Negative Reviews</h4>
+<p id="negative"></p>
+</div>
+
+</div>
 
 </div>
 
 </div>
+
 
 <script src="app.js"></script>
-
 </body>
 </html>
