@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<title>Feedback</title>
+<meta charset="UTF-8">
+<title>Customer Feedback</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<div class="container">
+
 <h2>Rate Your Experience</h2>
+
+<input id="name" placeholder="Your Name">
+
+<input id="contact" placeholder="Mobile Number">
 
 <select id="rating">
 
@@ -19,9 +26,13 @@
 
 </select>
 
+<textarea id="message" placeholder="Write feedback"></textarea>
+
 <button onclick="submitReview()">Submit</button>
 
-<script src="script.js"></script>
+</div>
+
+<script src="app.js"></script>
 
 </body>
 </html>
